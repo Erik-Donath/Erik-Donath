@@ -1,6 +1,6 @@
 # 💫 About Me:
-- 🔭 I’m currently working on [Block Game](https://github.com/Erik-Donath/BlockGame)
-- 🌱 I’m currently learning **C++23, OpenGL4 and Networking**
+- 🔭 I’m currently working on [Sodium](https://github.com/Erik-Donath/Sodium)
+- 🌱 I’m currently learning **C++23, C, x86 Assembly (For Sodium)**
 - 👨‍💻 All of my projects are available at [https://github.com/Erik-Donath](https://github.com/Erik-Donath)
 - 📫 How to reach me **erikdonath@proton.me**
 - ⚡ Fun fact **I like old Computers**
@@ -24,8 +24,6 @@
 ![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white) 
 ![TOR](https://img.shields.io/badge/tor-%237E4798.svg?style=for-the-badge&logo=tor-project&logoColor=white) 
 ![OpenGL](https://img.shields.io/badge/OpenGL-%23FFFFFF.svg?style=for-the-badge&logo=opengl) 
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) 
-![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) 
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white) 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) 
 ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) 
