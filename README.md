@@ -1,9 +1,9 @@
 # 💫 About Me:
-🔭 I’m currently working on [Sodium](https://github.com/Erik-Donath/Sodium)<br>
-🌱 I’m currently learning **C++23, C, x86 Assembly (For Sodium)**<br>
-👨‍💻 All of my projects are available at [https://github.com/Erik-Donath](https://github.com/Erik-Donath)<br>
-📫 How to reach me **erikdonath@proton.me**<br>
-⚡ Fun fact **I like old Computers**
+🔭 I’m currently working on: [Sodium](https://github.com/Erik-Donath/Sodium)<br>
+🌱 I’m currently learning: **C++23, C, x86 Assembly (For Sodium)**<br>
+👨‍💻 All of my projects are available at: [https://github.com/Erik-Donath](https://github.com/Erik-Donath)<br>
+📫 How to reach me: **erikdonath@proton.me**<br>
+⚡ Fun fact: **I like old Computers**
 
 
 # 💻 Tech Stack:
@@ -36,7 +36,6 @@
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 ![TOR](https://img.shields.io/badge/tor-%237E4798.svg?style=for-the-badge&logo=tor-project&logoColor=white)
 ![Ubiquiti](https://img.shields.io/badge/ubiquiti-%230559C9.svg?style=for-the-badge&logo=ubiquiti&logoColor=white)
-![OpenGL](https://img.shields.io/badge/OpenGL-white?logo=OpenGL&style=for-the-badge)
 
 # 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api?username=erik-donath&theme=onedark&hide_border=false&include_all_commits=true&count_private=true)<br/>
