@@ -1,17 +1,16 @@
 # 💫 About Me:
 🔭 I’m currently working on: [Sodium](https://github.com/Erik-Donath/Sodium)<br>
-🌱 I’m currently learning: **C++23, C, x86 Assembly (For Sodium)**<br>
+🌱 I’m currently learning: **C++23, C, x86 Assembly (for Sodium)**<br>
 👨‍💻 All of my projects are available at: [https://github.com/Erik-Donath](https://github.com/Erik-Donath)<br>
 📫 How to reach me: **erikdonath@proton.me**<br>
-⚡ Fun fact: **I like old Computers**
-
+⚡ Fun fact: **I like old computers**
 
 # 💻 Tech Stack:
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
 ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
-![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black)
@@ -53,3 +52,4 @@
 
 ---
 [![](https://visitcount.itsvg.in/api?id=erik-donath&icon=2&color=0)](https://visitcount.itsvg.in)
+Current date: Tuesday, June 10, 2025, 10:23 AM CEST
