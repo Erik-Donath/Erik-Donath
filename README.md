@@ -55,4 +55,3 @@
 ![](https://github-contributor-stats.vercel.app/api?username=erik-donath&limit=5&theme=onedark&combine_all_yearly_contributions=true)
 
 ---
-[![](https://visitcount.itsvg.in/api?id=erik-donath&icon=2&color=0)](https://visitcount.itsvg.in)
