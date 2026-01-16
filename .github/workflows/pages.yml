@@ -44,7 +44,7 @@ jobs:
         ls -la cache/ || echo "cache/ empty"
         curl -I "${{ matrix.url }}" || echo "Server returned: $?"
 
-    - name: Upload artifact
+    - name: Upload SVG artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: cache/
@@ -54,18 +54,22 @@ jobs:
     needs: cache
     steps:
     - uses: actions/checkout@v4
+    
     - name: Download Cache artifact
       uses: actions/download-artifact@v4
+      continue-on-error: true
       with:
-        name: github-pages-artifact
         path: cache/
+        
     - name: Setup Pages
       uses: actions/configure-pages@v5
+      
     - name: Build with Jekyll
       run: |
         bundle exec jekyll build
         mkdir -p _site/cache
-        cp cache/*.svg _site/cache/
+        cp -r cache/* _site/cache/ 2>/dev/null || echo "No SVGs available"
+        
     - name: Upload final site
       uses: actions/upload-pages-artifact@v3
       with:
@@ -76,7 +80,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [cache, page]
+    needs: [page]
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
