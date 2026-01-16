@@ -1,4 +1,4 @@
-name: Cache Stats SVG
+name: Pages
 on:
   schedule:
     - cron: '0 * * * *'
@@ -18,7 +18,6 @@ jobs:
         include:
           - path: stats-card.svg
             url: https://github-readme-stats.vercel.app/api?username=erik-donath
-
     steps:
     - name: Cache SVG files
       uses: actions/cache@v4
@@ -50,12 +49,34 @@ jobs:
       with:
         path: cache/
 
+  page:
+    runs-on: ubuntu-latest
+    needs: cache
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download Cache artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: github-pages-artifact
+        path: cache/
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+    - name: Build with Jekyll
+      run: |
+        bundle exec jekyll build
+        mkdir -p _site/cache
+        cp cache/*.svg _site/cache/
+    - name: Upload final site
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: _site
+
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: cache
+    needs: [cache, page]
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
