@@ -1,5 +1,4 @@
 name: Cache Stats SVG
-
 on:
   schedule:
     - cron: '0 * * * *'
@@ -34,14 +33,17 @@ jobs:
     - name: Fetch SVG
       run: |
         echo "Fetching ${{ matrix.url }} -> cache/${{ matrix.path }}"
-        
-        if curl -s -f --max-time 10 "${{ matrix.url }}" > cache/${{ matrix.path }}.new; then
-          mv cache/${{ matrix.path }}.new cache/${{ matrix.path }}
-          echo "Updated cache/${{ matrix.path }}"
-        else
-          echo "Fetch failed - preserving existing cache/${{ matrix.path }}"
-          rm -f cache/${{ matrix.path }}.new
-        fi
+        curl -v -f --max-time 30 "${{ matrix.url }}" > cache/${{ matrix.path }}.new &&
+        mv cache/${{ matrix.path }}.new cache/${{ matrix.path }} &&
+        echo "SUCCESS: $(wc -c < cache/${{ matrix.path }}) bytes"
+      continue-on-error: true
+
+    - name: Debug empty cache
+      if: failure()
+      run: |
+        echo "curl failed - listing cache contents:"
+        ls -la cache/ || echo "cache/ empty"
+        curl -I "${{ matrix.url }}" || echo "Server returned: $?"
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
