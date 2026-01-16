@@ -17,7 +17,7 @@ jobs:
       matrix:
         include:
           - path: stats-card.svg
-            url: https://github-readme-stats.vercel.app/api?username=erik-donath&theme=onedark&hide_border=false&include_all_commits=true&count_private=true
+            url: https://github-readme-stats.vercel.app/api?username=erik-donath
 
     steps:
     - name: Cache SVG files
