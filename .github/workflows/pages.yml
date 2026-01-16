@@ -63,6 +63,12 @@ jobs:
         
     - name: Setup Pages
       uses: actions/configure-pages@v5
+
+    - name: Install Ruby & Jekyll
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
       
     - name: Build with Jekyll
       run: |
