@@ -53,6 +53,7 @@ jobs:
     - name: Upload SVG artifact
       uses: actions/upload-pages-artifact@v4
       with:
+        name: cache-${{ matrix.path }}
         path: cache/
 
   page:
@@ -64,10 +65,11 @@ jobs:
       with:
         lfs: true
     
-    - name: Download Cache artifact
+    - name: Download Caches
       uses: actions/download-artifact@v4
       continue-on-error: true
       with:
+        pattern: cache-*
         path: cache/
         
     - name: Setup Pages
@@ -79,7 +81,7 @@ jobs:
       with:
         source: ./
         destination: ./_site
-    
+        
     - name: Copy Cache to site
       run: |
         mkdir -p _site/cache
