@@ -1,0 +1,60 @@
+name: Cache Stats SVG
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - path: stats-card.svg
+            url: https://github-readme-stats.vercel.app/api?username=erik-donath&theme=onedark&hide_border=false&include_all_commits=true&count_private=true
+
+    steps:
+    - name: Cache SVG files
+      uses: actions/cache@v4
+      with:
+        path: cache/
+        key: cache-${{ github.sha }}
+        restore-keys: cache-
+
+    - name: Create cache directory
+      run: mkdir -p cache/
+
+    - name: Fetch SVG
+      run: |
+        echo "Fetching ${{ matrix.url }} -> cache/${{ matrix.path }}"
+        
+        if curl -s -f --max-time 10 "${{ matrix.url }}" > cache/${{ matrix.path }}.new; then
+          mv cache/${{ matrix.path }}.new cache/${{ matrix.path }}
+          echo "Updated cache/${{ matrix.path }}"
+        else
+          echo "Fetch failed - preserving existing cache/${{ matrix.path }}"
+          rm -f cache/${{ matrix.path }}.new
+        fi
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: cache/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: cache
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
