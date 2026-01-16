@@ -24,18 +24,20 @@ jobs:
         include:
           - path: stats-card.svg
             url: https://github-readme-stats.vercel.app/api?username=erik-donath
+          - path: test.md
+            url: https://raw.githubusercontent.com/Erik-Donath/Erik-Donath/refs/heads/main/README.md
     steps:
     - name: Create cache directory
       run: mkdir -p cache/
 
-    - name: Cache SVG files
+    - name: Cache files
       uses: actions/cache@v4
       with:
         path: cache/
         key: cache-${{ github.sha }}
         restore-keys: cache-
 
-    - name: Fetch SVG
+    - name: Fetch file
       run: |
         echo "Fetching ${{ matrix.url }} -> cache/${{ matrix.path }}"
         curl -v -f --max-time 30 "${{ matrix.url }}" > cache/${{ matrix.path }}.new &&
@@ -50,11 +52,12 @@ jobs:
         ls -la cache/ || echo "cache/ empty"
         curl -I "${{ matrix.url }}" || echo "Server returned: $?"
 
-    - name: Upload SVG artifact
-      uses: actions/upload-pages-artifact@v4
+    - name: Upload cache
+      uses: actions/upload-artifact@v4
       with:
         name: cache-${{ matrix.path }}
         path: cache/
+        retention-days: 1
 
   page:
     runs-on: ubuntu-latest
@@ -65,7 +68,7 @@ jobs:
       with:
         lfs: true
     
-    - name: Download Caches
+    - name: Download cache
       uses: actions/download-artifact@v4
       continue-on-error: true
       with:
@@ -82,12 +85,14 @@ jobs:
         source: ./
         destination: ./_site
         
-    - name: Copy Cache to site
+    - name: Copy cache to site
       run: |
         mkdir -p _site/cache
-        find cache -name "*.svg" -exec cp {} _site/cache/ \; 2>/dev/null || echo "No Cache found"
+        cp cache/*.* _site/cache/ 2>/dev/null || echo "No files found"
+        echo "Cache files in _site/cache/:"
+        ls -la _site/cache/ 2>/dev/null || echo "None"
 
-    - name: Upload final site
+    - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
       with:
         path: ./_site
