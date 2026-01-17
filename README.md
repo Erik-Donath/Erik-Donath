@@ -40,7 +40,7 @@
 [![Debian](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)](#)
 
 # 📊 GitHub Stats:
-![Erik's GitHub Stats](https://github.com/Erik-Donath/Erik-Donath.github.io/blob/main/userstats.svg)
+![Stats](https://www.erikdonath.de/stats.svg)
 
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=gruvbox)
