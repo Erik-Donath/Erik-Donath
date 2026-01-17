@@ -24,6 +24,7 @@ jobs:
       with:
         colors: onedark
         include-title: false
+        commit-and-push: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
