@@ -22,10 +22,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - path: stats-card.svg
-            url: https://github-readme-stats.vercel.app/api?username=erik-donath
-          - path: test.md
-            url: https://raw.githubusercontent.com/Erik-Donath/Erik-Donath/main/README.md
+          - path: profile.svg
+            url: https://github-readme-stats.vercel.app/api?username=erik-donath&theme=onedark&hide_border=false&include_all_commits=true
+          - path: streak.svg
+            url: https://nirzak-streak-stats.vercel.app/?user=erik-donath&theme=onedark&hide_border=false
+          - path: lang.svg
+            url: https://github-readme-stats.vercel.app/api/top-langs/?username=erik-donath&theme=onedark&hide_border=false&include_all_commits=true&count_private=true&layout=compact
+          - path: trophy.svg
+            url: https://github-profile-trophy.vercel.app/?username=erik-donath&theme=onedark&no-frame=false&no-bg=false&margin-w=4
+          - path: contributor.svg
+            url: https://github-contributor-stats.vercel.app/api?username=erik-donath&limit=5&theme=onedark&combine_all_yearly_contributions=true
     steps:
     - name: Create cache directory
       run: mkdir -p cache/
