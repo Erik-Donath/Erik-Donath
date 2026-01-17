@@ -2,7 +2,7 @@ name: Pages
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 * * * *'
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -13,13 +13,12 @@ permissions:
   id-token: write
 
 jobs:
-  stats:
+  generate-stats:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Generate stats
-      id: stats
       uses: cicirello/user-statistician@v1
       with:
         colors: onedark
@@ -28,16 +27,48 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v4
+    - name: Move stats.svg to root
+      run: |
+        mv images/userstats.svg ./stats.svg
+    
+    - name: Upload stats artifact
+      uses: actions/upload-artifact@v4
       with:
-        path: ./
+        name: stats
+        path: stats.svg
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: stats
+    needs: generate-stats
     steps:
-    - uses: actions/deploy-pages@v4
+    - uses: actions/checkout@v4
+    
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v5
+    
+    - name: Download stats
+      uses: actions/download-artifact@v4
+      with:
+        name: stats
+    
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+    
+    - name: Build with Jekyll
+      run: bundle exec jekyll build
+    
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: ./_site/
+
+    - name: Deploy
+      id: deployment
+      uses: actions/deploy-pages@v4
