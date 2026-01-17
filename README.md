@@ -1,8 +1,8 @@
 # 💫 About Me
 🔭 I'm currently working on: [Sodium](https://github.com/Erik-Donath/Sodium)<br>
 🌱 I'm currently learning: **C++23, C, x86 Assembly (for Sodium)**<br>
-👨‍💻 All of my projects are available at: [https://github.com/Erik-Donath](https://github.com/Erik-Donath)<br>
-📫 How to reach me: **erik@erikdonath.de**<br>
+👨‍💻 All of my projects are available under: [Github](https://github.com/Erik-Donath)<br>
+📫 How to reach me: **[erik@erikdonath.de](mailto:erik@erikdonath.de)**<br>
 ⚡ Fun fact: **I like old computers**
 
 # 💻 Tech Stack
