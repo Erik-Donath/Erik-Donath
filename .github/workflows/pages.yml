@@ -34,12 +34,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: stats
-        path: stats.svg
+        path: ./stats.svg
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  page:
     runs-on: ubuntu-latest
     needs: generate-stats
     steps:
@@ -49,9 +46,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: stats
-    
-    - name: Copy stats.svg to Jekyll source
-      run: cp stats.svg ./stats.svg
+        path: ./
     
     - name: Setup Pages
       id: pages
@@ -63,11 +58,21 @@ jobs:
         source: ./
         destination: ./_site
     
+    - name: Copy stats to _site root
+      run: cp ./stats.svg _site/stats.svg
+    
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
       with:
-        path: ./_site/
+        path: ./_site
 
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: [page]
+    steps:
     - name: Deploy
       id: deployment
       uses: actions/deploy-pages@v4
