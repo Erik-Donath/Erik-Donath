@@ -42,7 +42,7 @@
 
 
 # 📊 GitHub Stats:
-![Stats](https://www.erikdonath.de/assets/stats.svg)
+[![Stats](https://www.erikdonath.de/assets/stats.svg)](#)
 
 ### ✍️ Random Dev Quote
-![](https://quotes-github-readme.vercel.app/api?type=horizontal)
+[![Random Dev Quote](https://quotes-github-readme.vercel.app/api?type=horizontal)](#)

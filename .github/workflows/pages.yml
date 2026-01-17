@@ -49,7 +49,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: stats
-        path: ./
+        path: ./assets
     
     - name: Setup Pages
       id: pages
