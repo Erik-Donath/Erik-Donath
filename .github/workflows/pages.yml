@@ -24,6 +24,9 @@ jobs:
         colors: onedark
         include-title: false
         commit-and-push: false
+        locale: de
+        fail-on-error: true
+        featured-repository: 'muTau-RV32-SoC'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
