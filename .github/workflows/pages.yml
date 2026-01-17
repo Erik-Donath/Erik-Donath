@@ -2,122 +2,41 @@ name: Pages
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 3 * * *'
+  workflow_dispatch:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  cache:
+  stats:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - path: stats-card.svg
-            url: https://github-readme-stats.vercel.app/api?username=erik-donath
-          - path: test.md
-            url: https://raw.githubusercontent.com/Erik-Donath/Erik-Donath/main/README.md
     steps:
-    - name: Create cache directory
-      run: mkdir -p cache/
-
-    - name: Cache files
-      uses: actions/cache@v4
-      with:
-        path: cache/
-        key: cache-${{ github.sha }}
-        restore-keys: cache-
-
-    - name: Fetch file
-      run: |
-        echo "Fetching ${{ matrix.url }} -> cache/${{ matrix.path }}"
-        curl -v -f --max-time 30 "${{ matrix.url }}" > cache/${{ matrix.path }}.new &&
-        mv cache/${{ matrix.path }}.new cache/${{ matrix.path }} &&
-        echo "SUCCESS: $(wc -c < cache/${{ matrix.path }}) bytes"
-      continue-on-error: true
-
-    - name: Debug empty cache
-      if: failure()
-      run: |
-        echo "curl failed - listing cache contents:"
-        ls -la cache/ || echo "cache/ empty"
-        curl -I "${{ matrix.url }}" || echo "Server returned: $?"
-
-    - name: Upload cache
-      uses: actions/upload-artifact@v4
-      with:
-        name: cache-${{ matrix.path }}
-        path: cache/${{ matrix.path }}
-        retention-days: 1
-
-  page:
-    runs-on: ubuntu-latest
-    needs: cache
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        lfs: true
+    - uses: actions/checkout@v4
     
-    - name: Download cache
-      uses: actions/download-artifact@v4
-      continue-on-error: true
+    - name: Generate stats
+      id: stats
+      uses: cicirello/user-statistician@v1
       with:
-        pattern: cache-*
-        path: cache/
-        
-    - name: Setup Pages
-      id: pages
-      uses: actions/configure-pages@v5
-      
-    - name: Flatten cache files
-      run: |
-        mkdir -p flat-cache/
-        find cache -type f -exec cp {} flat-cache/ \;
-        ls -la flat-cache/
-        rm -rf cache/* flat-cache/*.{new,tmp}
-        mv flat-cache/* cache/ 2>/dev/null || true
-        
-    - name: Build with Jekyll
-      uses: actions/jekyll-build-pages@v1
-      with:
-        source: ./
-        destination: ./_site
-        
-    - name: Copy cache to site
-      run: |
-        mkdir -p _site/cache
-        cp cache/* _site/cache/ 2>/dev/null || echo "No files found"
-        echo "Final _site/cache/:"
-        ls -la _site/cache/
-
+        colors: onedark
+        include-title: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
       with:
-        path: ./_site
+        path: ./
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [page]
+    needs: stats
     steps:
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
-      
-    - name: Debug final structure
-      run: |
-        find _site -type f | head -20 || echo "No _site found"
-        find _site/cache -type f || echo "No cache files"
-        ls -la _site/cache/ 2>/dev/null || echo "Empty"
+    - uses: actions/deploy-pages@v4

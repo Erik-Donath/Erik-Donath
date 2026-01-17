@@ -1,6 +1,6 @@
 # 💫 About Me:
-🔭 I’m currently working on: [Sodium](https://github.com/Erik-Donath/Sodium)<br>
-🌱 I’m currently learning: **C++23, C, x86 Assembly (for Sodium)**<br>
+🔭 I'm currently working on: [Sodium](https://github.com/Erik-Donath/Sodium)<br>
+🌱 I'm currently learning: **C++23, C, x86 Assembly (for Sodium)**<br>
 👨‍💻 All of my projects are available at: [https://github.com/Erik-Donath](https://github.com/Erik-Donath)<br>
 📫 How to reach me: **erikdonath@proton.me**<br>
 ⚡ Fun fact: **I like old computers**
@@ -39,19 +39,8 @@
 [![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](#)
 [![Debian](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)](#)
 
-
 # 📊 GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=erik-donath&theme=onedark&hide_border=false&include_all_commits=true&count_private=true)<br/>
-![](https://nirzak-streak-stats.vercel.app/?user=erik-donath&theme=onedark&hide_border=false)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=erik-donath&theme=onedark&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
-
-## 🏆 GitHub Trophies
-![](https://github-profile-trophy.vercel.app/?username=erik-donath&theme=onedark&no-frame=false&no-bg=false&margin-w=4)
+![Erik's GitHub Stats](https://github.com/Erik-Donath/Erik-Donath.github.io/blob/main/userstats.svg)
 
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=gruvbox)
-
-### 🔝 Top Contributed Repo
-![](https://github-contributor-stats.vercel.app/api?username=erik-donath&limit=5&theme=onedark&combine_all_yearly_contributions=true)
-
----
