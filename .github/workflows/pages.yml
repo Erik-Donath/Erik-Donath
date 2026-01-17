@@ -31,13 +31,13 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Move stats
-      run: mv images/userstats.svg ./stats.svg
+      run: mv images/userstats.svg ./assets/stats.svg
     
     - name: Upload stats artifact
       uses: actions/upload-artifact@v4
       with:
         name: stats
-        path: ./stats.svg
+        path: ./assets/stats.svg
 
   page:
     runs-on: ubuntu-latest
