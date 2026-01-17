@@ -27,7 +27,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Move stats.svg to root
+    - name: Move stats
       run: mv images/userstats.svg ./stats.svg
     
     - name: Upload stats artifact
@@ -57,9 +57,6 @@ jobs:
       with:
         source: ./
         destination: ./_site
-    
-    - name: Copy stats to _site root
-      run: cp ./stats.svg _site/stats.svg
     
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
