@@ -1,4 +1,4 @@
-# 💫 About Me:
+# 💫 About Me
 🔭 I'm currently working on: [Sodium](https://github.com/Erik-Donath/Sodium)<br>
 🌱 I'm currently learning: **C++23, C, x86 Assembly (for Sodium)**<br>
 👨‍💻 All of my projects are available at: [https://github.com/Erik-Donath](https://github.com/Erik-Donath)<br>
