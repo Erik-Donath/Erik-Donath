@@ -28,8 +28,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Move stats.svg to root
-      run: |
-        mv images/userstats.svg ./stats.svg
+      run: mv images/userstats.svg ./stats.svg
     
     - name: Upload stats artifact
       uses: actions/upload-artifact@v4
@@ -46,23 +45,26 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Pages
-      id: pages
-      uses: actions/configure-pages@v5
-    
     - name: Download stats
       uses: actions/download-artifact@v4
       with:
         name: stats
     
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.1'
-        bundler-cache: true
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v5
     
     - name: Build with Jekyll
-      run: bundle exec jekyll build
+      uses: actions/jekyll-build-pages@v1
+      with:
+        source: ./
+        destination: ./_site
+    
+    - name: Copy stats to site root
+      run: |
+        cp stats.svg _site/stats.svg
+        echo "_site/stats.svg created:"
+        ls -la _site/stats.svg
     
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
