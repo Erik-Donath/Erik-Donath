@@ -50,6 +50,9 @@ jobs:
       with:
         name: stats
     
+    - name: Copy stats.svg to Jekyll source
+      run: cp stats.svg ./stats.svg
+    
     - name: Setup Pages
       id: pages
       uses: actions/configure-pages@v5
@@ -59,12 +62,6 @@ jobs:
       with:
         source: ./
         destination: ./_site
-    
-    - name: Copy stats to site root
-      run: |
-        cp stats.svg _site/stats.svg
-        echo "_site/stats.svg created:"
-        ls -la _site/stats.svg
     
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
