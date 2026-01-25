@@ -76,7 +76,9 @@ jobs:
 
   page:
     runs-on: ubuntu-latest
-    needs: generate-stats
+    needs: 
+    - generate-stats
+    - generate-trophy
     steps:
     - uses: actions/checkout@v4
     

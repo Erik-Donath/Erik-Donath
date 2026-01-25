@@ -42,6 +42,7 @@
 
 
 # 📊 GitHub Stats:
+[![Trophies](https://www.erikdonath.de/assets/trophy.svg)](#)
 [![Stats](https://www.erikdonath.de/assets/stats.svg)](#)
 
 ### ✍️ Random Dev Quote
