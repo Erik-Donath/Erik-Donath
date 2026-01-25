@@ -42,7 +42,7 @@ jobs:
   generate-trophy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo (so the generator script is available)
+    - name: Checkout repo
       uses: actions/checkout@v4
       with:
         fetch-depth: 1
