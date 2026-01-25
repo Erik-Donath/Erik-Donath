@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate trophy
-      uses: Erik-Donath/github-profile-trophy@main
+      uses: Erik-Donath/github-profile-trophy/.github/actions/github-profile-trophy@main
       with:
         username: ${{ github.actor }}
         output_path: ./assets/trophy.svg
