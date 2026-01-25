@@ -38,6 +38,41 @@ jobs:
       with:
         name: stats
         path: ./assets/stats.svg
+  
+  generate-trophy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo (so the generator script is available)
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+
+    - name: Checkout trophy project
+      uses: actions/checkout@v4
+      with:
+        repository: ryo-ma/github-profile-trophy
+        path: trophy
+        ref: 97e9fad67971e2558d58a6284f368220cd8552a1
+
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+
+    - name: Ensure assets directory exists
+      run: mkdir -p ./assets
+
+    - name: Generate trophy SVG
+      env:
+        GITHUB_TOKEN1: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        deno run --allow-net --allow-env --allow-read --allow-write .github/workflows/generate_trophy.ts "${{ github.actor }}" "${{ github.workspace }}/assets/trophy.svg"
+
+    - name: Upload trophy artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: trophy
+        path: ./assets/trophy.svg
 
   page:
     runs-on: ubuntu-latest
@@ -49,6 +84,12 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: stats
+        path: ./assets
+    
+    - name: Download trophy
+      uses: actions/download-artifact@v4
+      with:
+        name: trophy
         path: ./assets
     
     - name: Setup Pages
