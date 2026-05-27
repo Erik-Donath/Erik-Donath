@@ -40,6 +40,7 @@
 [![Ubiquiti](assets/langs/ubiquiti.svg?style=for-the-badge&logo=ubiquiti&logoColor=white)](#)
 [![Notion](assets/langs/notion.svg?style=for-the-badge&logo=notion&logoColor=white)](#)
 
+![I USE ARCH BTW](https://img.shields.io/badge/I%20use%20Arch%20btw-000000?style=for-the-badge&logo=archlinux)
 
 # 📊 GitHub Stats:
 [![Trophies](https://www.erikdonath.de/assets/trophy.svg)](#)
