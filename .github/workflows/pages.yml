@@ -13,8 +13,33 @@ permissions:
   id-token: write
 
 jobs:
+  check-rate-limit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check GitHub API rate limit
+      id: rate_limit
+      run: |
+        RATE_LIMIT_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit)
+        REMAINING=$(echo "$RATE_LIMIT_RESPONSE" | jq '.rate_limit.remaining')
+        LIMIT=$(echo "$RATE_LIMIT_RESPONSE" | jq '.rate_limit.limit')
+        RESET=$(echo "$RATE_LIMIT_RESPONSE" | jq '.rate_limit.reset')
+        
+        echo "remaining=$REMAINING" >> $GITHUB_OUTPUT
+        echo "limit=$LIMIT" >> $GITHUB_OUTPUT
+        echo "reset=$RESET" >> $GITHUB_OUTPUT
+        
+        echo "API Rate Limit Status:"
+        echo "  Remaining: $REMAINING / $LIMIT"
+        echo "  Reset at: $(date -d @$RESET)"
+        
+        if [ "$REMAINING" -lt 10 ]; then
+          echo "::warning::GitHub API rate limit is critically low ($REMAINING remaining). Workflow will be cancelled."
+          exit 1
+        fi
+
   generate-stats:
     runs-on: ubuntu-latest
+    needs: check-rate-limit
     steps:
     - uses: actions/checkout@v4
     
@@ -41,7 +66,10 @@ jobs:
 
   generate-trophy:
     runs-on: ubuntu-latest
+    needs: check-rate-limit
     steps:
+    - uses: actions/checkout@v4
+    
     - name: Generate trophy
       uses: ryo-ma/github-profile-trophy@master
       with:
