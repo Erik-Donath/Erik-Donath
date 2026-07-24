@@ -19,21 +19,38 @@ jobs:
     - name: Check GitHub API rate limit
       id: rate_limit
       run: |
+        set -euo pipefail
+
+        # Fetch rate limit and log the raw response for debugging
         RATE_LIMIT_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit)
-        REMAINING=$(echo "$RATE_LIMIT_RESPONSE" | jq '.rate_limit.remaining')
-        LIMIT=$(echo "$RATE_LIMIT_RESPONSE" | jq '.rate_limit.limit')
-        RESET=$(echo "$RATE_LIMIT_RESPONSE" | jq '.rate_limit.reset')
-        
+        echo "Rate response: $RATE_LIMIT_RESPONSE"
+
+        # Support both shapes: { "resources": { "core": { ... } } } and { "rate": { ... } }
+        REMAINING=$(echo "$RATE_LIMIT_RESPONSE" | jq -r '.resources.core.remaining // .rate.remaining // empty' || true)
+        LIMIT=$(echo "$RATE_LIMIT_RESPONSE" | jq -r '.resources.core.limit // .rate.limit // empty' || true)
+        RESET=$(echo "$RATE_LIMIT_RESPONSE" | jq -r '.resources.core.reset // .rate.reset // empty' || true)
+
+        # If we couldn't parse remaining, abort to avoid making API calls that may fail
+        if [ -z "$REMAINING" ]; then
+          echo "::error::Unable to parse GitHub rate limit response. Aborting to preserve existing site assets."
+          exit 1
+        fi
+
         echo "remaining=$REMAINING" >> $GITHUB_OUTPUT
         echo "limit=$LIMIT" >> $GITHUB_OUTPUT
         echo "reset=$RESET" >> $GITHUB_OUTPUT
-        
+
         echo "API Rate Limit Status:"
         echo "  Remaining: $REMAINING / $LIMIT"
-        echo "  Reset at: $(date -d @$RESET)"
-        
-        if [ "$REMAINING" -lt 10 ]; then
-          echo "::warning::GitHub API rate limit is critically low ($REMAINING remaining). Workflow will be cancelled."
+        if [ -n "$RESET" ] && [ "$RESET" != "null" ]; then
+          # Show human-readable reset time if available
+          echo "  Reset at: $(date -d @$RESET)"
+        fi
+
+        # Threshold: fail (exit 1) if remaining calls are critically low.
+        THRESHOLD=10
+        if [ "$REMAINING" -lt "$THRESHOLD" ]; then
+          echo "::warning::GitHub API rate limit is critically low ($REMAINING remaining). Cancelling workflow to keep existing trophy.svg online."
           exit 1
         fi
 
@@ -42,7 +59,7 @@ jobs:
     needs: check-rate-limit
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Generate stats
       uses: cicirello/user-statistician@v1
       with:
@@ -54,10 +71,10 @@ jobs:
         featured-repository: 'muTau-RV32-SoC'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
     - name: Move stats
       run: mv images/userstats.svg ./assets/stats.svg
-    
+
     - name: Upload stats artifact
       uses: actions/upload-artifact@v4
       with:
@@ -69,7 +86,7 @@ jobs:
     needs: check-rate-limit
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Generate trophy
       uses: ryo-ma/github-profile-trophy@master
       with:
@@ -90,29 +107,29 @@ jobs:
     - generate-trophy
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Download stats
       uses: actions/download-artifact@v4
       with:
         name: stats
         path: ./assets
-    
+
     - name: Download trophy
       uses: actions/download-artifact@v4
       with:
         name: trophy
         path: ./assets
-    
+
     - name: Setup Pages
       id: pages
       uses: actions/configure-pages@v5
-    
+
     - name: Build with Jekyll
       uses: actions/jekyll-build-pages@v1
       with:
         source: ./
         destination: ./_site
-    
+
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
       with:
