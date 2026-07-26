@@ -1,6 +1,6 @@
 # 💫 About Me
 🔭 I'm currently working on: [Sodium](https://github.com/Erik-Donath/Sodium)<br>
-🌱 I'm currently learning: **C++23, C, x86 Assembly (for Sodium)**<br>
+🌱 I'm currently learning: **Low Level Development and Operating System architecture<br>
 👨‍💻 All of my projects are available under: [Github](https://github.com/Erik-Donath)<br>
 📫 How to reach me: **[github@erikdonath.de](mailto:github@erikdonath.de)**<br>
 ⚡ Fun fact: **I like old computers**
