@@ -5,6 +5,17 @@
 📫 How to reach me: **[github@erikdonath.de](mailto:github@erikdonath.de)**<br>
 ⚡ Fun fact: **I like old computers**
 
+ORCID Account:
+<a
+  id="cy-effective-orcid-url"
+  class="underline"
+  href="https://orcid.org/0009-0007-1010-0645"
+  target="orcid.widget"
+  rel="me noopener noreferrer"
+  style="vertical-align: top">
+  https://orcid.org/0009-0007-1010-0645
+</a>
+
 # 💻 Tech Stack
 
 [![C](assets/langs/c.svg?style=for-the-badge&logo=c&logoColor=white)](#)
